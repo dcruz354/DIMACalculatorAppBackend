@@ -1,6 +1,19 @@
-import { OrdersModel } from './order.model';
+//import { OrdersModel } from './order.model';
 import { Schema, model } from 'mongoose';
 
+
+export class OrdersModel {
+    constructor(name: string, numbrOfHoles: number, savings: number, size: number) {
+        this.name = name;
+        this.numbrOfHoles = numbrOfHoles;
+        this.savings = savings;
+        this.size = size;
+    }
+    name: string;
+    numbrOfHoles: number;
+    savings: number;
+    size: number;
+}
 
 const OrdersSchema = new Schema<OrdersModel>({
     name: {
@@ -8,7 +21,7 @@ const OrdersSchema = new Schema<OrdersModel>({
         required: 'An order name is required to create a new order',
     },
 
-    numberOfHoles: {
+    numbrOfHoles: {
         type: Number,
         default: 0,
     },
