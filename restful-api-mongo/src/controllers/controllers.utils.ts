@@ -9,7 +9,7 @@ export const defaultCallback = (req: any, res: any) => (
     if(err) {
         res.send(err);
     } 
-    res.json(data);
+    res.status(200).json(data);
 };
 
 export const optsCallback = (req: any, res: any) => (options: CallbackOpts) => (

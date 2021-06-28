@@ -1,4 +1,3 @@
-import { defaultCallback } from './controllers.utils';
 import { User } from './../models/user.model';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
@@ -70,7 +69,7 @@ export const getLoggedInUser = async (req: any, res: any) => {
     try{
         res.send(req.user);
     } catch (error) {
-        console.log('Error getting logout post');
+        //console.log('Error getting logout post');
         res.status(500).send(error);
     }
 };
@@ -84,8 +83,8 @@ export const loginUser = async (req: any, res: any) => {
         return res.status(400).send('AUTH_FAIL');
         }
         const token = await generateAuthToken(user);
-        console.log("Login Worked");
-        res.send({user, token});
+        //console.log("Login Worked");
+        res.status(200).send({user, token});
     } catch (error) {
         res.status(400).send('AUTH_FAIL');
     }
@@ -94,12 +93,12 @@ export const loginUser = async (req: any, res: any) => {
 export const logoutUser = async (req: any, res: any) => {
     // Logout from ONE device. Just current device.
     try {
-        console.log("Inside logoutUser");
+        //console.log("Inside logoutUser");
         req.user.tokens = req.user.tokens.filter((token: any) => {
         return token.token !== req.token;
         });
         await req.user.save();
-        console.log("Logout Worked");
+        //console.log("Logout Worked");
         res.send({success: true});
     } catch (error) {
         res.status(500).send(error);
@@ -108,10 +107,10 @@ export const logoutUser = async (req: any, res: any) => {
 
 export const logoutAllUser = async (req: any, res: any) => {
     try {
-        console.log("Inside logoutAllUser");
+        //console.log("Inside logoutAllUser");
         req.user.tokens.splice(0, req.user.tokens.length);
         await req.user.save();
-        console.log("logoutAllUser Worked");
+        //console.log("logoutAllUser Worked");
         res.send({success: true});
     } catch (error) {
         res.status(500).send(error);
